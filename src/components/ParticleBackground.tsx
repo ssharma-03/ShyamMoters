@@ -1,12 +1,12 @@
-import { useCallback } from 'react'
-import Particles from "@tsparticles/react"
-import type { Engine } from "@tsparticles/engine"
-import { loadSlim } from "@tsparticles/slim"
+import React from 'react'
+import Particles from 'react-tsparticles'
+import { loadFull } from 'tsparticles'
+import type { Engine } from 'tsparticles-engine'
 
-export default function ParticleBackground() {
-  const particlesInit = useCallback(async (engine: Engine) => {
-    await loadSlim(engine)
-  }, [])
+const ParticleBackground: React.FC = () => {
+  const particlesInit = async (engine: Engine) => {
+    await loadFull(engine)
+  }
 
   return (
     <Particles
@@ -15,45 +15,54 @@ export default function ParticleBackground() {
       options={{
         background: {
           color: {
-            value: "transparent",
+            value: 'transparent',
           },
         },
         fpsLimit: 60,
         interactivity: {
           events: {
+            onClick: {
+              enable: true,
+              mode: 'push',
+            },
             onHover: {
               enable: true,
-              mode: "grab",
+              mode: 'repulse',
             },
-            resize: true,
+            resize: {
+              enable: true,
+              delay: 0.5,
+            },
           },
           modes: {
-            grab: {
+            push: {
+              quantity: 4,
+            },
+            repulse: {
               distance: 200,
-              links: {
-                opacity: 0.3,
-              },
+              duration: 0.4,
             },
           },
         },
         particles: {
           color: {
-            value: "#0A2463",
+            value: '#ffffff',
           },
           links: {
-            color: "#3E92CC",
+            color: '#ffffff',
             distance: 150,
             enable: true,
-            opacity: 0.2,
+            opacity: 0.5,
             width: 1,
           },
           move: {
+            direction: 'none',
             enable: true,
             outModes: {
-              default: "bounce",
+              default: 'bounce',
             },
             random: false,
-            speed: 2,
+            speed: 1,
             straight: false,
           },
           number: {
@@ -64,13 +73,13 @@ export default function ParticleBackground() {
             value: 80,
           },
           opacity: {
-            value: 0.3,
+            value: 0.5,
           },
           shape: {
-            type: "circle",
+            type: 'circle',
           },
           size: {
-            value: { min: 1, max: 3 },
+            value: { min: 1, max: 5 },
           },
         },
         detectRetina: true,
@@ -78,3 +87,5 @@ export default function ParticleBackground() {
     />
   )
 }
+
+export default ParticleBackground
