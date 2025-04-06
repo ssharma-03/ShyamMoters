@@ -68,8 +68,6 @@ export default function ParticleBackground() {
           number: {
             density: {
               enable: true,
-              factor: 1000,
-              value_area: 800,
             },
             value: 80,
           },
