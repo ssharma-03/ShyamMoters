@@ -1,12 +1,12 @@
-import React from 'react'
-import Particles from 'react-tsparticles'
-import { loadFull } from 'tsparticles'
-import type { Engine } from 'tsparticles-engine'
+import { useCallback } from 'react'
+import Particles from '@tsparticles/react'
+import type { Engine } from '@tsparticles/engine'
+import { loadSlim } from '@tsparticles/slim'
 
-const ParticleBackground: React.FC = () => {
-  const particlesInit = async (engine: Engine) => {
-    await loadFull(engine)
-  }
+export default function ParticleBackground() {
+  const particlesInit = useCallback(async (engine: Engine) => {
+    await loadSlim(engine)
+  }, [])
 
   return (
     <Particles
@@ -87,5 +87,3 @@ const ParticleBackground: React.FC = () => {
     />
   )
 }
-
-export default ParticleBackground
